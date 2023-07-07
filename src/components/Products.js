@@ -1,7 +1,8 @@
 import React from 'react'
 import ProductCards from './ProductCards'
 
-export const Products = () => {
+export const Products = ({products}) => {
+  console.log(products)
   return (
     <div className='py-10'>
       <div className="flex flex-col items-center gap-4" >
@@ -14,8 +15,14 @@ export const Products = () => {
         Discover a world of incredible products and unbeatable deals. We pride ourselves on offering a vast selection of top-quality items that cater to all your needs and desires. Whether you're searching for the latest fashion trends, cutting-edge gadgets, home essentials, or unique gifts, we've got you covered.
         </p>
       </div>
-      <div className='max-w-screen-xl mx-auto'> 
-        <ProductCards/>
+      <div className='max-w-screen-xl mx-auto py-10 grid grid-cols-4 gap-10'> 
+        {/* <ProductCards/> */}
+        
+         {
+          products.map((item)=> (
+            <ProductCards key={item._id} product={item}/>
+          ))
+         }
       </div>
     </div>
   )
