@@ -2,8 +2,11 @@ import React from 'react'
 import { logoDark } from '../assets'
 import { cartImg } from '../assets'
 import {Link} from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 const Header = () => {
+  const productData = useSelector((state) => state.bazar.productData)
+  console.log(productData)
   return (
     <div className='w-full h-20 bg-white border-b-[1px] border-b-gray-800 font-titleFont'>
       <div className='max-w-screen-xl h-full mx-auto flex items-center justify-between'>
@@ -30,11 +33,13 @@ const Header = () => {
             hover:underline underline-offset-2 decoration-[1px] cursor-pointer
             duration-300'>Blog</li>
           </ul>
-          <div className='relative'>
-            <img className='w-6' src={cartImg} alt="cartImg" />
-            <span className='absolute w-6 top=2 left-0 text-sm flex items-center
-             justify-center font-semibold'>0</span>
-          </div>
+          <Link to="/cart">
+            <div className='relative'>
+              <img className='w-6' src={cartImg} alt="cartImg" />
+              <span className='absolute w-6 top=2 left-0 text-sm flex items-center
+              justify-center font-semibold'>{productData.length}</span>
+            </div>
+          </Link>
             <img className='w-8 h-8 rounded-full'
             src="https://w7.pngwing.com/pngs/722/101/png-transparent-computer-icons-user-profile-circle-abstract-miscellaneous-rim-account.png"
             alt='userLogo'/>
