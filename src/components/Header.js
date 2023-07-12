@@ -40,9 +40,11 @@ const Header = () => {
               justify-center font-semibold'>{productData.length}</span>
             </div>
           </Link>
+          <Link to='/login'>
             <img className='w-8 h-8 rounded-full'
-            src="https://w7.pngwing.com/pngs/722/101/png-transparent-computer-icons-user-profile-circle-abstract-miscellaneous-rim-account.png"
-            alt='userLogo'/>
+              src="https://w7.pngwing.com/pngs/722/101/png-transparent-computer-icons-user-profile-circle-abstract-miscellaneous-rim-account.png"
+              alt='userLogo'/>
+          </Link>
         </div>
       </div>
     </div>
