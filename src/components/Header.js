@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useId } from 'react'
 import { logoDark } from '../assets'
 import { cartImg } from '../assets'
 import {Link} from 'react-router-dom'
@@ -6,6 +6,8 @@ import { useSelector } from 'react-redux'
 
 const Header = () => {
   const productData = useSelector((state) => state.bazar.productData)
+  const userInfo = useSelector((state) => state.bazar.userInfo)
+  console.log(userInfo)
   console.log(productData)
   return (
     <div className='w-full h-20 bg-white border-b-[1px] border-b-gray-800 font-titleFont'>
@@ -42,9 +44,14 @@ const Header = () => {
           </Link>
           <Link to='/login'>
             <img className='w-8 h-8 rounded-full'
-              src="https://w7.pngwing.com/pngs/722/101/png-transparent-computer-icons-user-profile-circle-abstract-miscellaneous-rim-account.png"
+              src={
+                userInfo?userInfo.image : "https://w7.pngwing.com/pngs/722/101/png-transparent-computer-icons-user-profile-circle-abstract-miscellaneous-rim-account.png"
+              }
               alt='userLogo'/>
           </Link>
+          {
+            userInfo && <p className='text-base font-titleFont font-semibold underline underline-offset-2'>{userInfo.name}</p>
+          }
         </div>
       </div>
     </div>
