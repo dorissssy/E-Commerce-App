@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import CartItem from '../components/CartItem'
 import { toast, ToastContainer } from 'react-toastify'
+import StripeCheckout from 'react-stripe-checkout';
+import axios from 'axios';
 
 const Cart = () => {
   const productData = useSelector((state) => state.bazar.productData)
@@ -23,6 +25,13 @@ const Cart = () => {
     } else {
       toast.error("Please sign in to checkout")
     }
+  }
+
+  const payment = async(token) => {
+    await axios.post("http://localhost:8000/pay", {
+      amount:totalAmt * 100,
+      token: token
+    })
   }
   return (
     
@@ -59,6 +68,19 @@ const Cart = () => {
           className='text-base bg-black text-white w-full py-3 mt-6 hover:bg-gray-800 duration-300'>
             proceed to checkout
           </button>
+          {
+            payNow && <div className='w-full mt-6 flex items-center justify-center'>
+              <StripeCheckout
+              stripeKey='pk_test_51NV4BJHOel2NngI00WUsn3unPTkpC1jNp2lXpUoexkblIZWGRkOVjuaTbc9UIik5YdK27xpFZh3k5VYZeK853xgi00eng81IM2'
+              name="Bazar Online Shopping"
+              amount = {totalAmt * 100}
+              label = "Pay to bazar"
+              description={`Your payment amount is $${totalAmt}`}
+              token={payment}
+              email={userInfo.email}
+              />
+            </div>
+          }
         </div>
       </div>
       <ToastContainer
